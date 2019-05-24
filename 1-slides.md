@@ -26,10 +26,6 @@ Also:
 
 ---
 
-<img src="figures/seismic_waves.png" alt="drawing" width="1600"/>
-Seismic Imaging
----
-
 ![](figures/dataflow.png)
 
 Typical data flow pattern for adjoint problems
@@ -69,8 +65,11 @@ LPDDR3 RAM
 
 ---
 
-
 ## Viewpoint problem
+
+---
+
+![](figures/results_car.png)
 
 ---
 
