@@ -1,0 +1,453 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+
+\usepackage{multirow}
+
+
+\usepackage[utf8]{inputenc}%\input{join-revolve_Alternative.tex}
+
+\usepackage[american]{babel}
+\usepackage{stmaryrd}
+\usepackage{enumerate}
+%\usepackage{enumitem}
+\usepackage[cmex10]{amsmath}
+\usepackage{bm}
+\usepackage{amsfonts,amssymb,amsthm,amstext,latexsym}
+\usepackage{xspace}
+\usepackage{paralist}
+\usepackage{url}
+\usepackage{hyperref}
+%%\usepackage[left]{lineno}
+\usepackage[normalem]{ulem}
+\usepackage{fullpage}
+\usepackage[nottoc]{tocbibind}
+
+
+\usepackage{graphicx}
+\usepackage{subcaption}
+%\linenumbers
+
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+%\usepackage[noend]{algorithmic}
+
+
+%\usepackage{booktabs}
+
+\usepackage{environ}
+\NewEnviron{killcontents}{}
+
+%%%%%%%%%%% Uncomment to hide proofs for restructuring
+%\let\proof\killcontents
+%\let\endproof\endkillcontents
+
+
+
+\usepackage[usenames,dvipsnames]{xcolor} %Mettre ce paquet avant tikz.
+\usepackage{tikz}
+\usepackage{todonotes}
+%\usepackage{subfig}
+
+\usepackage{graphicx}
+\graphicspath{{../code/Optimal_Checkpoint/plots/}}
+
+\usetikzlibrary{patterns}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathmorphing} % noisy shapes
+\usetikzlibrary{fit}					% fitting shapes to coordinates
+\usetikzlibrary{backgrounds}	% drawing the background after the foreground
+
+\usetikzlibrary{arrows,shapes}
+\usetikzlibrary{trees,snakes}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shadows}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%							MACROS	 						%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%	General macros
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{conjecture}{Conjecture}
+\newenvironment{intuitions}{\textit{Intuitions.}}{\hfill$\square$}
+\newtheorem{innercustomthm}{Theorem}
+\newenvironment{customthm}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{problem}{Problem}
+\newtheorem{notation}{Notation}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\ie}{{\it i.e.}\xspace}	
+
+
+
+\newcounter{mypropctr}
+\setcounter{mypropctr}{-1}
+\newenvironment{myprop}{
+\newline\noindent
+	\refstepcounter{mypropctr}
+	\textsc{(P\themypropctr):}
+}{}
+
+
+
+\newcommand{\eg}{e. g.}
+\newcommand{\hidden}[1]{}
+\newcommand{\new}[1]{#1}
+\newcommand{\renew}[1]{#1}
+\newcommand{\propref}[1]{(P\ref{#1})}
+\newcommand{\proprefind}[2]{(P\ref{#1}(\ref{#2}))}
+\newcommand{\proprefL}[2]{(P\ref{#1}) to~(P\ref{#2})}
+
+\newcommand{\ema}[1]{\ensuremath{#1}\xspace}
+
+\newcommand{\cmem}{\ema{c}}
+\newcommand{\cdisks}{\ema{c_d}}
+
+\newcommand{\buft}{\ema{\mathcal{B}^\top}}
+\newcommand{\bufb}{\ema{\mathcal{B}^\bot}}
+\newcommand{\mem}{\ema{\mathcal{M}}}
+\newcommand{\disk}{\ema{\mathcal{D}}}
+\newcommand{\cost}[1]{\ema{\text{cost(\ema{#1})}}}
+
+\newcommand{\std}{\ema{\textit{std}}}
+\newcommand{\seq}{\ema{\textit{seq}}}
+\newcommand{\pyrv}{\ema{\textit{pyrv}}}
+
+%set of indices
+\newcommand{\seti}[1][]{\ema{I_{#1}}}
+
+
+%new command for one chain loop definition
+\newcommand{\Lpop}[2]{\ema{\mathfrak{S}^{(#1)}_{#2}}}
+% multibranch backward step
+\newcommand{\MuBa}[2]{\ema{\bar{F}^{(#1)}_{#2}}}
+% multibranch forward step
+\newcommand{\MuFo}[2]{\ema{F^{(#1)}_{#2}}}
+% multibranch  forward x
+\newcommand{\MuX}[2]{\ema{x^{(#1)}_{#2}}}
+%multibranch backward x
+\newcommand{\MuBaX}[2]{\ema{\bar{x}^{(#1)}_{#2}}}
+
+
+
+\newcommand{\wmem}{\ema{w_m}}
+\newcommand{\rmem}{\ema{r_m}}
+\newcommand{\wdisks}{\ema{w_d}}
+\newcommand{\bwdisks}{\ema{\bm{w_d}}}
+\newcommand{\rdisks}{\ema{r_d}}
+
+\newcommand{\lX}{\ema{l_X}}
+\newcommand{\lXb}{\ema{l_X^{\text{ub}}}}
+\newcommand{\lmin}{\ema{l_{\text{min}}}}
+\newcommand{\mX}{\ema{m_X}}
+\newcommand{\iX}{\ema{i_X}}
+\newcommand{\iXb}{\ema{i_X^{\text{ub}}}}
+\newcommand{\nl}[1][l]{\ema{n_{#1}}}
+\newcommand{\nlonline}[1][l]{\ema{n^o_{#1}}}
+\newcommand{\Nl}[1][l]{\ema{\mathcal{N}_X({#1})}}
+\newcommand{\NlXn}[1][l]{\ema{\mathcal{N}_{X_n}({#1})}}
+\newcommand{\nlstar}[1][l]{\ema{n_{X_n}(#1)}}
+\newcommand{\nlstarn}[2][n]{\ema{n_{X_{#1}}(#2)}}
+\newcommand{\jmax}{\ema{j_{\text{max}}}}
+
+
+\newcommand{\MX}{\ema{\mathcal{M}_X}}
+\newcommand{\LX}{\ema{\mathcal{L}_X}}
+\newcommand{\Madm}{\ema{\mathcal{M}_X^{(\text{Adm})}}}
+\newcommand{\fX}{\ema{\texttt{RelCost}_X}}
+
+
+
+\newcommand{\ldef}[1][l]{\ema{l = \sum_{i=1}^{\nl[#1]} m_i + \resid}}
+
+
+\newcommand{\revolve}[1][]{\ema{\textsc{Rev}#1}}
+\newcommand{\shift}[1][]{\ema{\textsc{Shift}#1}}
+
+\newcommand{\sched}{\ema{\mathcal{S}}}
+\newcommand{\resid}{\ema{\text{res}}}
+\newcommand{\scheduplet}[1][l]{\ema{(m_1, \cdots, m_{\nl[#1]}; \resid)}}
+\newcommand{\schedupletstar}[1][l]{\ema{(m_1, \cdots, m_{\nlstar[#1]}; \resid)}}
+\newcommand{\schedupletprime}[1][l]{\ema{(m'_1, \cdots, m'_{\nl[#1]}; \resid')}}
+\newcommand{\DS}{\ema{\text{DS}}}
+\newcommand{\PDS}[1][{l, \cmem, \wdisks, \rdisks}]{\ema{\text{PDS(#1)}}}
+\newcommand{\OPDS}[1][{l, \cmem, \wdisks, \rdisks}]{\ema{\text{OPDS(#1)}}}
+
+\newcommand{\DOS}{\ema{\text{DOS}}}
+\newcommand{\MDOS}{\ema{\text{M-DOS}}}
+
+
+\newcommand{\prob}[1][]{\ema{\textsc{Prob}_{#1}}}
+\newcommand{\probkrev}[1][{\lvect, c, \bvect}]{\ema{\prob[\times k](#1)}}
+\newcommand{\probtild}[1][]{\ema{\overline{\textsc{Prob}}_{#1}}}
+\newcommand{\probzero}[1][{l, c}]{\ema{\prob(#1)}}
+\newcommand{\subprobzero}[1][{l, c}]{\ema{\overline{\prob}(#1)}}
+\newcommand{\probinf}[1][{l,\cmem, \wdisks, \rdisks}]{\ema{\prob[\infty](#1)}}
+\newcommand{\probmulti}[1][{\lvect, c}]{\ema{\prob[\text{multi}](#1)}}
+\newcommand{\probmix}[1][{\lvect, c, \bvect}]{\ema{\prob^{\bvect}(#1)}}
+%\newcommand{\probmultiyyy}[1][{\lvect, c}]{\ema{\overline{\prob[\text{multi}]}(#1)}}
+\newcommand{\probplus}[1][{\lvect, c_b, c_a}]{\ema{\prob[+](#1)}}
+
+\newcommand{\probinftild}[1][{l,\cmem, \wdisks, \rdisks}]{\ema{\prob[\infty]^{(d)}(#1)}}
+\newcommand{\subprobinftild}[1][{l,\cmem, \wdisks, \rdisks}]{\ema{\probtild[\infty]^{(d)}(#1)}}
+\newcommand{\probzerotild}[1][{l,\cmem, \wdisks, \rdisks}]{\ema{\prob[1]^{(d)}(#1)}}
+\newcommand{\subprobzerotild}[1][{l,\cmem, \rdisks}]{\ema{\probtild[1]^{(d)}(#1)}}
+
+\newcommand{\optzero}[1][{l, c}]{\ema{\opt_0\left(#1\right)}}
+\newcommand{\optPyTorch}[1][{i, \ell, c}]{\ema{\opt_{\text{PT}}\left(#1\right)}}
+%\newcommand{\optkrev}[1][{\lforb[0], \lforb[1], c}]{\ema{\opt_{\parallel}\left(#1\right)}}
+\newcommand{\optkrev}[1][{k_0, k_1}]{\ema{\opt^{\lforb[0], \lforb[1], c, \bvect}_{\parallel}\left(#1\right)}}
+\newcommand{\optkmin}[1][{\lforb[0], \lforb[1], c, \bvect}]{\ema{\opt^{#1}_{\parallel}\left(k-\sum_{i=1}^k \bvect_i, \sum_{i=1}^k \bvect_i\right)}}
+\newcommand{\suboptzero}[1][{l, c}]{\ema{\overline{\opt_0}\left(#1\right)}}
+%\newcommand{\optinf}[1][{l, \cmem, \wdisks, \rdisks}]{\ema{\opt_\infty(#1)}}
+\newcommand{\optinftild}[1][{l, \cmem, \wdisks, \rdisks}]{\ema{\opt_\infty^{(d)}\left(#1\right)}}
+\newcommand{\optzerotild}[1][{l, \cmem, \rdisks}]{\ema{\opt_1^{(d)}(#1)}}
+\newcommand{\optmultiyyy}[1][{\lvect, c}]{\ema{\overline{\opt}\left(#1\right)}}
+\newcommand{\optmulti}[1][{\lvect, c, \bvect}]{\ema{\opt^{\bvect}\left(#1\right)}}
+\newcommand{\optplus}[1][{\lvect, c_b, c_a}]{\ema{\overline{\opt_+}\left(#1\right)}}
+\newcommand{\optmultinnn}[1][{\lvect, c}]{\ema{\opt\left(#1\right)}}
+
+\newcommand{\decomposition}[1][m_1:m_2]{\ema{[[#1]]}}
+
+
+% order sigma 
+\newcommand{\ord}[2]{\ema{ \Psi^{(#1)}_{#2}}}
+\newcommand{\costsi}[1][ \Psi]{\ema{\text{Cost} (#1)}}
+
+
+\newcommand{\opt}{\ema{\text{Opt}}}
+\newcommand{\optp}{\ema{\tilde{\text{Opt}}}}
+\newcommand{\uf}{\ema{u_f}}
+\newcommand{\ub}{\ema{u_b}}
+\newcommand{\of}{\ema{o_f}}
+\newcommand{\ob}{\ema{o_b}}
+\newcommand{\up}{\ema{u_p}}
+\newcommand{\wx}{\ema{w^x}}
+\newcommand{\wy}{\ema{w^y}}
+\newcommand{\wbx}{\ema{\bar{w}^x}}
+
+\newcommand{\forop}[1][]{\ema{F_{#1}}}
+\newcommand{\eforop}[1][]{\ema{F^e_{#1}}}
+\newcommand{\nforop}[1][]{\ema{F^n_{#1}}}
+\newcommand{\cforop}[1][]{\ema{CF_{#1}}}
+
+\newcommand{\bacop}[1][]{\ema{B_{#1}}}
+
+\newcommand{\stepS}{\ema{\mathfrak{S}}}
+\newcommand{\stepSt}{\ema{\tilde{\mathfrak{S}}}}
+
+\newcommand{\stor}{\ema{s}}
+\newcommand{\exec}{\ema{\mathcal{E}xec}}
+\newcommand{\algoprecomp}{\textsc{AlgoPreComp}\xspace}
+
+\newcommand{\algodom}{\textsc{AlgoDom}\xspace}
+\newcommand{\algopds}{\textsc{AlgoPDS}\xspace}
+
+\newcommand{\algodomtrans}{\textsc{AlgoDomTrans}\xspace}
+\newcommand{\algodomper}{\textsc{AlgoDomPer}\xspace}
+\newcommand{\shit}{\ema{\textsc{Shift}}}
+
+\newcommand{\algoinf}{\ema{\textsc{Disk-\revolve}}}
+\newcommand{\algozerotild}{\ema{\textsc{1D-\revolve}}}
+\newcommand{\AHHR}{\textsc{AHHR}\xspace}
+
+\newcommand{\algoonline}{\textsc{Disk-A-\revolve}\xspace}
+
+
+\newcommand{\AC}{AC\xspace}
+\newcommand{\adjointcomputation}{adjoint computation\xspace}
+\newcommand{\adjointcomputations}{adjoint computations\xspace}
+\newcommand{\adjointcomputationMAJ}{Adjoint Computation\xspace}
+\newcommand{\adjointcomputationMulti}{Adjoint Computation with k chains \xspace}
+
+\newcommand{\wt}[1][]{\ema{w_{#1}}}
+\newcommand{\bwt}[1][]{\ema{\bar{w}_{#1}}}
+\newcommand{\cvect}{\ema{\textbf{c}}}
+\newcommand{\lvect}{\ema{\boldsymbol\ell}}
+\newcommand{\lminus}[1][]{\ema{\lvect[-#1]}}
+\newcommand{\lforb}[1][]{\ema{\lvect^{(#1)}}}
+\newcommand{\bvect}{\ema{\boldsymbol b}}
+\newcommand{\lcond}[1][]{\ema{\lvect_{\left[#1\right]}}}
+\newcommand{\bcond}[1][]{\ema{\bvect_{[#1]}}}
+\newcommand{\zerovect}{\ema{\textbf{0}}}
+\newcommand{\hieropt}[1][{l, \cvect}]{\ema{\text{HierOpt(#1)}}}
+\newcommand{\hieroptd}[1][{l, \cvect}]{\ema{\text{HierOpt}^{(d)}(#1)}}
+\newcommand{\greedy}[1][{n,m,\cmem}]{\ema{\text{G}}(#1)}
+\newcommand{\greedyn}[2][{n,m,\cmem}]{\ema{\text{G}_{#2}}(#1)}
+\newcommand{\join}[1][{n,m,\cmem}]{\ema{\text{F}}(#1)}
+\newcommand{\rplusn}{\ema{{\mathbb{R}^+}^n}}
+
+% node for P (computation of loss functions and their gradients)
+\tikzstyle{P_node} = [circle, thick, minimum size = 1.2cm, draw = black, fill = black!20, font = \small]
+
+% The backward operation are represented by a grey circle.
+\tikzstyle{bwop}	=	[circle, thick, minimum size=1.2cm, draw=black, fill=black!20, font=\footnotesize]
+% The forward operations are represented by an grey circle.
+\tikzstyle{fwop}	=	[circle, thick, minimum size=1.2cm, draw=black, fill=black!20, font=\footnotesize]
+\tikzstyle{cwop}	=	[circle, thick, minimum size=1.2cm, draw=black, fill=black!20, font=\footnotesize]
+
+% The backward output are represented by a grey circle.
+\tikzstyle{bwoutput}	=	[circle, thick, minimum size=1cm, draw=black, fill=black!20, font=\footnotesize]
+% The forward output are represented by an grey circle.
+\tikzstyle{fwoutput}	=	[circle, thick, minimum size=1cm, draw=black, fill=black!20, font=\footnotesize]
+
+% The backward output are represented by a grey circle.
+\tikzstyle{bwopG}	=	[rectangle, thick, draw=black, fill=black!20, font=\footnotesize]
+% The forward output are represented by an grey circle.
+\tikzstyle{fwopG}	=	[rectangle, thick, draw=black, fill=black!20, font=\footnotesize]
+\tikzstyle{background}=[rectangle, fill=gray!25, inner sep=0.2cm, rounded corners=5mm]
+
+
+
+
+\newcommand{\bufcol}{DarkOrchid}
+\newcommand{\memcol}{ForestGreen}
+\newcommand{\diskcol}{NavyBlue}
+\newcommand{\ODrevolveShort}[1][]{\ema{\textsc{1D-Rev}#1}}
+
+\newcommand{\plotOptDISK}[3][]{
+	\draw[draw opacity=0] (#2,-0.5) rectangle (#3,-1.5) node[\diskcol,pos=.5] {#1};
+	\draw (#2,-0.5) node[rectangle,fill=\diskcol] (r) {};
+	\draw[line width=2pt,\diskcol,->] (#2,-0.5) .. controls (#3,-0.5) .. (#3,-1.5) .. controls (#2,-1.5) .. (r.south);
+}
+
+\newcommand{\plotOptMEM}[3][]{
+	\draw[draw opacity=0] (#2,-0.5) rectangle (#3,-1.5) node[\memcol,pos=.5] {#1};
+	\draw (#2,-0.5) node[rectangle,fill=\memcol] (r) {};
+	\draw[line width=2pt,\memcol,->] (#2,-0.5) .. controls (#3,-0.5) .. (#3,-1.5) .. controls (#2,-1.5) .. (r.south);
+}
+
+\newcommand{\plotRev}[4][]{
+	\draw[draw opacity=0, fill opacity = 1, fill = white] (#2,0) rectangle (#3,-1) node[#4,pos=.5] {#1};
+	\draw (#2,0) node[rectangle,fill=#4] (r) {};
+	\draw[line width=2pt, #4,->] (#2,0) .. controls (#3,0) .. (#3,-1) .. controls (#2,-1) .. (r.south);
+}
+\newcommand{\downFig}[2][0]{
+\begin{scope}[yshift=-#1cm]
+#2
+\end{scope}
+}
+
+
+\begin{document}
+
+\begin{figure}[htb]
+	\begin{center}
+		\resizebox{0.8\columnwidth}{!}{
+			\begin{tikzpicture}[>=latex]
+			% The various elements are conveniently placed using a matrix:
+			\matrix[row sep=0.7cm,column sep=0.8cm,ampersand replacement=\&] {
+				% First line: Forward operations
+				%\&
+				\node (finput)  [] {};	\&
+				\node (f_1) [fwopG]{$F_0$};	\&
+				%\node (f_2)   [fwopG]{$F_1$};     \&
+				\node (f_x)   {$\cdots$};     \&
+				\node (f_i-2)[fwopG] {$F_{i-2}$}; \&
+				\node (f_i-1) [fwopG]{$F_{i-1}$}; \&
+				\node (f_i) [fwopG]{$F_i$}; \&
+				\node (f_y) {$\cdots$}; \&
+				%\node (f_l-2) [fwopG]{$F_{l-2}$}; \&
+				\node (f_l-1) [fwopG]{$F_{l-1}$}; \&
+				\node (foutput) [] {};	\& \&
+				\\
+				% Second line: Backward operations
+				\node (boutput) [] {};	\&
+				\node (b_2l+1) [bwopG]{\bacop[0]};	\&
+				%\node (b_2l) [bwopG]{\bacop[1]};	\&
+				%\node (b_2l-1)   [bwopG]{\bacop[2]};     \&
+				\node (b_x)   {$\cdots$};     \&
+				\node (b_i-2) [bwopG]{\bacop[i-2]}; \&
+				\node (b_i-1) [bwopG]{\bacop[i-1]}; \&
+				\node (b_i) [bwopG]{\bacop[i]}; \&
+				\node (b_y) {$\cdots$}; \&
+				\node (b_l+1) [bwopG]{\bacop[l-1]}; \&
+				\node (b_l+2) [bwopG]{\bacop[l]}; \&
+				\node (binput) [] {};	\&
+				
+				\\
+			};
+			
+			% \draw[red] (0,0) -- (1,1)
+
+			 
+			 
+			% The diagram elements are now connected through arrows:
+			\path[->]
+			% Forward path Ti -> Ti+1
+			(finput) edge node [pos=0.5, above] {$x_0$} (f_1)
+			(f_1) edge node [pos=0.5, above] {$x_1$} (f_x)
+			%(f_2) edge node [pos=0.5, above] {$x_2$} (f_x)
+			(f_x) edge node [pos=0.5, above] {$x_{i-2}$} (f_i-2)
+			(f_i-2) edge node [pos=0.5, above] {$x_{i-1}$} (f_i-1)
+			(f_i-1) edge node [pos=0.5, above] {$x_{i}$} (f_i)
+			(f_i) edge node [pos=0.5, above] {$x_{i+1}$} (f_y)
+			(f_y) edge node [pos=0.5, above] {$x_{l-1}$} (f_l-1)
+			(f_l-1) edge node [pos=0.5, above] {$x_{l}$} (b_l+2)
+			
+			
+			
+			%(f_l-1) edge node [pos=0.5, above] {$x_{l}$} (foutput)
+			
+			% Backward path Ti -> Ti+1
+			%(binput) edge node [pos=0.5, below] {$\bar{x}_{l+1}$} (b_l+2)
+			(b_l+2) edge node [pos=0.5, below] {$\bar{x}_{l}$} (b_l+1)
+			(b_l+1) edge node [pos=0.5, below] {$\bar{x}_{l-1}$} (b_y)
+			(b_y) edge node [pos=0.5, below] {$\bar{x}_{i+1}$} (b_i)
+			(b_i) edge node [pos=0.5, below] {$\bar{x}_{i}$} (b_i-1)
+			(b_i-1) edge node [pos=0.5, below] {$\bar{x}_{i-1}$} (b_i-2)
+			(b_i-2) edge node [pos=0.5, below] {$\bar{x}_{i-2}$} (b_x)
+			%(b_x) edge node [pos=0.5, below] {$\bar{x}_{1}$} (b_2l-1)
+			%(b_2l-1) edge node [pos=0.5, below] {$\bar{x}_{2}$} (b_2l)
+			(b_x) edge node [pos=0.5, below] {$\bar{x}_{1}$} (b_2l+1)
+			(b_2l+1) edge node [pos=0.5, below] {$\bar{x}_{0}$} (boutput)
+			
+			% Transversal paths
+			(finput) edge node [pos=0.5, right] {$x_0$} (b_2l+1)
+			(f_1) edge node [pos=0.5, right] {$x_1$} (b_x)
+			(f_x) edge node [pos=0.5, right] {$x_{i-2}$} (b_i-2)
+			(f_i-2) edge node [pos=0.5, right] {$x_{i-1}$} (b_i-1)
+			(f_i-1) edge node [pos=0.5, right] {$x_{i}$} (b_i)
+			(f_i) edge node [pos=0.5, right] {$x_{i+1}$} (b_y)
+			(f_y) edge node [pos=0.5, right] {$x_{l-1}$} (b_l+1)			
+			%(f_2)   edge node [pos=0.5, right] {$x_2$} (b_2l-1)
+			%(f_l-2)   edge node [pos=0.5, right] {$x_{l-1}$} (b_l+1)
+			%(f_l-1)   edge node [pos=0.5, right] {$x_{l}$} (b_l+2)
+			;
+			
+			%    \begin{pgfonlayer}{background}
+			%        \node [background, fit=(input) (b_l+1)] {};
+			%    \end{pgfonlayer}
+			\end{tikzpicture}
+		}
+	\end{center}
+	\caption{The data dependencies in the \AC chain.}
+	\label{fig:autoadj.modified}
+\end{figure}
+\textbf{Input:} cost of one forward step $u_f$, cost of one backward step $u_b$, chain length $\ell$ and total memory size $c$.
+
+\begin{align*}
+\optzero[\ell,1] &=  \frac{\ell (\ell +1)}{2} u_f  + (\ell+1 ) u_b \\
+ \optzero[1, c] &= u_f +2 u_b\\
+\optzero[\ell, c] &= \min_{1 \leq i \leq \ell-1} \left\{  i u_f +\optzero[\ell - i,  c -1] + \optzero[i-1, c]\right\}\\
+\end{align*}
+
+\end{document}
