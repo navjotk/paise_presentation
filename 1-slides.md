@@ -190,4 +190,8 @@ Batch Size: $1$, Image Size: $500 \times 500$
 Batch Size: $8$, Image Size: $500 \times 500$
 
 ---
-Practical implementation
+## Practical implementation and concluding remarks
+
+---
+
+# THANK YOU
