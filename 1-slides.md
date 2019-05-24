@@ -104,7 +104,64 @@ Memory required (GB) for batch size 8
 
 ---
 
-Introduce Checkpoint Sequential
+PyTorch
+
+* fast-evolving Python package widely applied in deep learning
+* uses Tensors as a basic class
+* Tensors are similar to NumPy arrays which also allow to work with them on GPU
+* dynamically defines the computational graph of the model
+* designed to be memory efficient: there is checkpointing strategy
+
+
+---
+
+Checkpoint sequential: number of segments = 2
+
+![](figures/checkpoint_seq1.png)
+
+---
+
+Checkpoint sequential: number of segments = 2
+
+![](figures/checkpoint_seq2.png)
+
+---
+
+
+Checkpoint sequential: number of segments = 2
+
+![](figures/checkpoint_seq3.png)
+
+
+---
+
+Checkpoint sequential: number of segments = 2
+
+![](figures/checkpoint_seq4.png)
+
+---
+
+Checkpoint sequential: number of segments = 2
+
+![](figures/checkpoint_seq5.png)
+
+$$
+\mbox{Memory} = s - 1 + \bigl(l - \left\lfloor l/s \right\rfloor (s -1) \bigr).
+$$
+
+---
+
+Revolve: dynamic programming
+
+![](figures/revolve_explanation.png)
+
+
+$$
+\small{\mbox{Opt}[\ell,1] =  \frac{\ell (\ell +1)}{2} u_f  + (\ell+1 ) u_b}$$
+
+ $$\small{\mbox{Opt}[1, c] = u_f +2 u_b}$$
+
+$$\small{\mbox{Opt}[\ell, c] = \min_{1 \leq i \leq \ell-1} ( i u_f +\mbox{Opt}[\ell - i,  c -1] + \mbox{Opt}[i-1, c]) }$$
 
 ---
 
